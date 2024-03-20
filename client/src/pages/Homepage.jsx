@@ -1,26 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Card from "../components/Card";
 import axios from "axios";
-
-
+import { DataContext } from "../context/dataContext";
 
 export default function HomePage() {
-  const [data, setData] = useState()
 
-async function fetchData(){
-  try {
-    const {data} = await axios({
-      method:'get',
-      url:"http://localhost:3000/products"
-    })
-    setData(data)
-  } catch (error) {
-    console.log(error);
-  }
-}
-useEffect(()=>{
-  fetchData()
-})
+  const data = useContext(DataContext)
+
   return (
     <>
       <section className="pt-20">
