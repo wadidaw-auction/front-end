@@ -21,16 +21,16 @@ const router = createBrowserRouter([
       {
         path: "/bidding", //path
          element: <Bidding/>
-       },
+       },{
+        path: "/product/:id", //path
+         element: <Websocket/>,
+       }
     ],
   },
   {
    path: "/about", //path
     element: <div>Hello world!</div>,
-  },{
-    path: "/product/:id", //path
-     element: <Websocket/>,
-   },
+  },
    {
    path: "/regis", //path
     element: <RegisPage/>,
