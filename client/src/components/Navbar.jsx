@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import Swal from 'sweetalert2'
 export default function NavBar() {
 
   const navigate = useNavigate()
@@ -22,13 +22,13 @@ export default function NavBar() {
   const handleFormLogin = async (event) => {
     event.preventDefault();
     try {
-      let respon = await axios({
+      const {data} = await axios({
         method: "post",
-        url: "http://localhost:6969/login",
+        url: "http://localhost:3000/login",
         data: input,
       });
-      // console.log(respon);
-      localStorage.access_token = respon.data.access_token;
+      console.log(data);
+      localStorage.access_token = data.token;
       navigate("/");
       Swal.fire({
         title: "login success",
@@ -120,6 +120,7 @@ export default function NavBar() {
           >
             Login
           </button>
+          {/* modal */}
           <dialog
             id="my_modal_5"
             className="modal modal-bottom sm:modal-middle"
@@ -159,7 +160,6 @@ export default function NavBar() {
                     Register
                   </Link>
 
-                  
                 </p>
               </form>
 
@@ -171,6 +171,7 @@ export default function NavBar() {
               </div>
             </div>
           </dialog>
+           {/*end modal */}
         </div>
       </div>
       {/* </div> */}

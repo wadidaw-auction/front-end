@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react"
 import socket from "../socket"
+import axios from "axios"
+import { useParams } from "react-router-dom"
 
 function Websocket(){
+    const {id} = useParams()
+    const [price,setPrice] = useState()
 
     useEffect(()=>{
         socket.disconnect()
@@ -32,11 +36,29 @@ function Websocket(){
         })
     }
 
+    async function fetchData(){
+        try {
+            const {data} = await axios({
+                method : "get",
+                url : "http://localhost:3000/product/" + id
+            })
+
+            // console.log(data);
+            setPrice(data.price)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(()=>{
+        fetchData()
+    },[])
+
     function handleSubmit(event){
         event.preventDefault()
         console.log(input.price);
         console.log(socket.auth.token);
-        let initialPrice = 0
+        
+        let initialPrice = price
 
         if (input.price > initialPrice) {
             //emit? isinya data user dari localstorage?
@@ -44,6 +66,7 @@ function Websocket(){
             socket.emit('placeBid', {
                 //data?
                 //id?
+                id,
                 token : socket.auth.token,//localStorage.access_token,
                 price : input.price
             })

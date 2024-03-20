@@ -23,7 +23,7 @@ const router = createBrowserRouter([
    path: "/about", //path
     element: <div>Hello world!</div>,
   },{
-    path: "/websocket", //path
+    path: "/product/:id", //path
      element: <Websocket/>,
    },
    {
