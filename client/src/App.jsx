@@ -4,8 +4,9 @@ import viteLogo from '/vite.svg'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import MainLayout from './components/MainLayout'
 import HomePage from './pages/Homepage'
-import Websocket from './pages/Websocket'
 
+import Websocket from './pages/Websocket'
+import RegisPage from './pages/RegistPage'
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
     path: "/websocket", //path
      element: <Websocket/>,
    },
+   {
+   path: "/regis", //path
+    element: <RegisPage/>,
+  },
+
  ])    
 
  function app(){

@@ -3,11 +3,11 @@ import Card from "../components/Card";
 export default function HomePage() {
   return (
     <>
-      <section className="pt-36">
-        <div className="container">
+      <section className="pt-20">
+        {/* <div className="container"> */}
           <div className="flex flex-wrap">
-            <div className="w-full self-center px-4">
-              <h1 className="text-base font-semibold text-teal-500 mb-5">
+            <div className="w-full self-center px-4 md:text-xl lg:text-4xl lg:text-center ">
+              <h1 className="text-base font-semibold text-teal-500 mb-5 ">
                 Welcome,
                 <span className="block font-bold text-teal-500 text-4xl">
                   Wadidaw Auction
@@ -25,7 +25,7 @@ export default function HomePage() {
           <div className="w-full self-center items-center px-4 mt-5">
             <Card/>
           </div>
-        </div>
+        {/* </div> */}
       </section>
     </>
   );
