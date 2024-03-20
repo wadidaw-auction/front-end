@@ -1,6 +1,26 @@
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
+import axios from "axios";
+
+
 
 export default function HomePage() {
+  const [data, setData] = useState()
+
+async function fetchData(){
+  try {
+    const {data} = await axios({
+      method:'get',
+      url:"http://localhost:3000/products"
+    })
+    setData(data)
+  } catch (error) {
+    console.log(error);
+  }
+}
+useEffect(()=>{
+  fetchData()
+})
   return (
     <>
       <section className="pt-20">
@@ -23,7 +43,10 @@ export default function HomePage() {
           </div>
 
           <div className="w-full self-center items-center px-4 mt-5">
-            <Card/>
+            
+            {data && 
+            data.map((el)=> <Card el={el} key={el.id}/>)}
+
           </div>
         {/* </div> */}
       </section>

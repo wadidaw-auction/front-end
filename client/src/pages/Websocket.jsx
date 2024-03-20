@@ -96,11 +96,27 @@ function Websocket(){
 
     return(
         <>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}>
             <label htmlFor="">Last Bid : {price}</label><br />
         <input type="number" name="price"  onChange={handleInput}/>
         <button type="submit">Add bid</button>
-        </form>
+        </form> */}
+
+        <div className="flex justify-center items-center h-screen">
+    <div className="border-2 rounded-lg p-8 shadow-lg items-center" >
+      <h1 className="block font-bold text-teal-500 text-4xl text-center">Place Your Bid</h1>
+      <h1 className="block font-bold text-teal-500 text-4xl text-center">Below!</h1>
+    <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-8">
+    <div className="mb-4">
+        <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">Last Bid: Rp. {price?.toLocaleString()}</label>
+        <input type="number" id="username" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  name="name" onChange={handleInput} required />
+      </div>
+      <div className="flex items-center justify-between">
+        <button type="submit" className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Place bid</button>
+      </div>
+    </form>
+    </div>
+    </div>
         </>
     )
 }
