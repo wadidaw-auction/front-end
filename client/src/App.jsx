@@ -7,6 +7,7 @@ import HomePage from './pages/Homepage'
 
 import Websocket from './pages/Websocket'
 import RegisPage from './pages/RegistPage'
+import Bidding from './pages/Bidding'
 
 
 const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/", //path
          element: <HomePage/>
+       },
+      {
+        path: "/bidding", //path
+         element: <Bidding/>
        },
     ],
   },

@@ -29,13 +29,15 @@ export default function NavBar() {
       });
       console.log(data);
       localStorage.access_token = data.token;
-      navigate("/");
+      document.getElementById("my_modal_5").close()
+      navigate('/')
       Swal.fire({
         title: "login success",
         icon: "success",
       });
     } catch (error) {
       console.log(error);
+      document.getElementById("my_modal_5").close()
       Swal.fire({
         title: error.response.data.message,
         icon: "error",
@@ -114,12 +116,25 @@ export default function NavBar() {
           </a>
         </div>
         <div className="navbar-end">
-          <button
-            className="btn semi-bold text-teal-500 "
-            onClick={() => document.getElementById("my_modal_5").showModal()}
-          >
-            Login
-          </button>
+        {localStorage.access_token ? (
+                <Link
+                  className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => {
+                    localStorage.removeItem("access_token");
+                    navigate("/");
+                  }}
+                >
+                  Logout
+                </Link>
+              ) : (
+                <button
+                className="btn semi-bold text-teal-500 "
+                onClick={() => document.getElementById("my_modal_5").showModal()}
+              >
+                Login
+              </button>
+              )}
+
           {/* modal */}
           <dialog
             id="my_modal_5"
