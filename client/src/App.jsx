@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
@@ -8,6 +8,7 @@ import HomePage from './pages/Homepage'
 import Websocket from './pages/Websocket'
 import RegisPage from './pages/RegistPage'
 import Bidding from './pages/Bidding'
+import socket from './socket'
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,15 @@ const router = createBrowserRouter([
  ])    
 
  function app(){
+  
+  useEffect(()=>{
+    socket.disconnect()
+    socket.auth = {
+        token : localStorage.access_token
+    }
+    socket.connect()
+},[])
+
      return <RouterProvider router={router} />
  }
 

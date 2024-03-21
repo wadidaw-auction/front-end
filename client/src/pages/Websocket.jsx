@@ -8,26 +8,21 @@ function Websocket(){
     const {id} = useParams()
     const [price,setPrice] = useState()
     const [input,setInput] = useState()
+    const roomId = id
+
     useEffect(()=>{
-        socket.disconnect()
-        socket.auth = {
-            token : localStorage.access_token
-        }
-        socket.connect()
+        
+        socket.emit("bidRoom", roomId);
     },[])
 
 
     useEffect(()=>{
-        socket.on("message", (param)=>{
-            console.log(param, "<<<< server punya");
-        })
 
         socket.on("New Bidder", (param)=>{
             console.log(param, "<<<< new bidder");
             setInput(param.price)
             setPrice(param.price)
         })
-
 
         return ()=>{
             socket.off("message")
@@ -39,7 +34,6 @@ function Websocket(){
 
     function handleInput(event){
         // const {name,value} = event.target
-
         setInput(event.target.value)
     }
 
@@ -76,6 +70,7 @@ function Websocket(){
             socket.emit('placeBid', {
                 //data?
                 //id?
+                roomId,
                 id,
                 token : socket.auth.token,//localStorage.access_token,
                 price : input
@@ -87,7 +82,7 @@ function Websocket(){
               });
         }else{
             Swal.fire({
-                title: "minimal input adalah " + (initialPrice+1),
+                title: "minimal input adalah " + (+initialPrice + 1),
                 icon: "error",
               });
         }
