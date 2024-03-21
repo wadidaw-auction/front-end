@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { BASE_URL } from "../../constant";
 export default function NavBar() {
 
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ export default function NavBar() {
     try {
       const {data} = await axios({
         method: "post",
-        url: "http://localhost:3000/login",
+        url: `${BASE_URL}/login`,
         data: input,
       });
       console.log(data);

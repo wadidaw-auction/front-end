@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { BASE_URL } from "../../constant";
 
 export default function RegisPage() {
   
@@ -28,7 +29,7 @@ export default function RegisPage() {
     try {
       let respon = await axios({
         method: "post",
-        url: "http://localhost:3000/register",
+        url: `${BASE_URL}/register`,
         data: input,
       });
       // console.log(respon);

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../../constant';
 
 export const DataContext = createContext();
 
@@ -11,7 +12,7 @@ export const DataProvider = ({ children }) => {
       try {
         const { data } = await axios({
             method : "get",
-            url : "http://localhost:3000/products"
+            url : `${BASE_URL}/products`
           });
         setData(data);
       } catch (error) {

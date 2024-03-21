@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import Swal from "sweetalert2"
 import Toast from "../components/Toast"
 import { toast } from "react-toastify"
+import { BASE_URL } from "../../constant"
 // import { Toast } from "react-toastify/dist/components"
 
 
@@ -12,10 +13,10 @@ function Websocket(){
     const {id} = useParams()
     const [price,setPrice] = useState()
     const [input,setInput] = useState()
+    const [name,setName] = useState()
     const roomId = id
 
     useEffect(()=>{
-        
         socket.emit("bidRoom", roomId);
     },[])
 
@@ -28,11 +29,19 @@ function Websocket(){
             setPrice(param.price)
         })
 
+        socket.on("toast", (param)=>{
+            console.log(param, "<<<< new bidder");
+            toast.success(`Data has been successfully saved! ${name} has bidded Rp. ${input}`, {
+                autoClose: 2000 // milliseconds
+              });
+        })
+
         return ()=>{
-            socket.off("message")
+            socket.off("toast")
             socket.off("New Bidder")
         }
     })
+
 
     
 
@@ -45,12 +54,14 @@ function Websocket(){
         try {
             const {data} = await axios({
                 method : "get",
-                url : "http://localhost:3000/product/" + id
+                url : `${BASE_URL}/product/` + id
             })
 
             console.log(data);
             setPrice(data.price)
             setInput(data.price)
+            setName(data.User.name)
+
         } catch (error) {
             console.log(error);
         }
@@ -71,6 +82,7 @@ function Websocket(){
         if (input > initialPrice) {
             //emit? isinya data user dari localstorage?
             //
+            // console.log(socket.auth.token, "<<<<<<<<<<<<<<<<,");
             socket.emit('placeBid', {
                 //data?
                 //id?
@@ -79,10 +91,10 @@ function Websocket(){
                 token : socket.auth.token,//localStorage.access_token,
                 price : input
             })
-            console.log(id,'<<<<<<<<');
-            toast.success(`Data has been successfully saved! ${input}`, {
-                autoClose: 2000 // milliseconds
-              });
+            //TOAST
+
+            
+
             Swal.fire({
                 title: "Bid Success",
                 icon: "success",
