@@ -111,9 +111,9 @@ export default function NavBar() {
           </div>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost font-semibold text-teal-500 text-3xl">
+          <Link to={'/'} className="btn btn-ghost font-semibold text-teal-500 text-3xl">
             Wadidaw Auction
-          </a>
+          </Link>
         </div>
         <div className="navbar-end">
         {localStorage.access_token ? (
