@@ -3,6 +3,10 @@ import socket from "../socket"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import Swal from "sweetalert2"
+import Toast from "../components/Toast"
+import { toast } from "react-toastify"
+// import { Toast } from "react-toastify/dist/components"
+
 
 function Websocket(){
     const {id} = useParams()
@@ -80,7 +84,10 @@ function Websocket(){
                 token : socket.auth.token,//localStorage.access_token,
                 price : input
             })
-
+            console.log(id,'<<<<<<<<');
+            toast.success(`Data has been successfully saved! ${input}`, {
+                autoClose: 2000 // milliseconds
+              });
             Swal.fire({
                 title: "Bid Success",
                 icon: "success",
@@ -104,6 +111,7 @@ function Websocket(){
 
         <div className="flex justify-center items-center h-screen">
     <div className="border-2 rounded-lg p-8 shadow-lg items-center" >
+    <Toast />
       <h1 className="block font-bold text-teal-500 text-4xl text-center">Place Your Bid</h1>
       <h1 className="block font-bold text-teal-500 text-4xl text-center">Below!</h1>
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-8">

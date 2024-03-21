@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 export default function Card({el}) {
   return (
     <>
-      <div className="card card-compact w-96 bg-base-100 shadow-xl rounded-lg">
-        <figure>
+      <div className="card card-compact w-96 bg-base-100 shadow-xl rounded-lg ml-5 mt-5 ">
+        <figure className="relative w-full h-60">
           <img
+          className="object-cover w-full h-full rounded-t-lg"
             src={el.imageUrl}
             alt={el.name}
           />
